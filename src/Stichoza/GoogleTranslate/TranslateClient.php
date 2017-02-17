@@ -7,6 +7,7 @@ use ErrorException;
 use Exception;
 use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\Exception\RequestException as GuzzleRequestException;
+use GuzzleHttp\Query;
 use InvalidArgumentException;
 use ReflectionClass;
 use Stichoza\GoogleTranslate\Tokens\GoogleTokenGenerator;
@@ -287,7 +288,7 @@ class TranslateClient
 
         try {
             $response = $this->httpClient->post($this->urlBase, [
-                    'query' => $queryUrl,
+                    'query' => Query::fromString($queryUrl),
                     'body'  => $queryBodyEncoded,
                 ] + $this->httpOptions);
         } catch (GuzzleRequestException $e) {
